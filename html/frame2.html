@@ -7,11 +7,174 @@
     <title>开发</title>
     <link rel="stylesheet" type="text/css" href="../css/api.css"/>
     <link rel="stylesheet" type="text/css" href="../css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/sm.min.css" />
     <style>
-        .empty{ text-align: center; padding: 120px 0; }
+
     </style>
 </head>
 <body>
-    <div class="empty">开发</div>
+  <div class="content" id="app">
+  <div class="list-block" style="margin: 10px 0px">
+    月设置
+    <ul>
+      <li>
+        <div class="item-content">
+          <div class="item-media"><i class="icon icon-form-renting"></i></div>
+          <div class="item-inner">
+            <div class="item-title label">租房</div>
+            <div class="item-input">
+              <input type="text" :value="month.renting">
+            </div>
+          </div>
+        </div>
+      </li>
+      <li>
+        <div class="item-content">
+          <div class="item-media"><i class="icon icon-form-restaurant"></i></div>
+          <div class="item-inner">
+            <div class="item-title label">餐饮</div>
+            <div class="item-input">
+              <input type="text" :value="month.restaurant">
+            </div>
+          </div>
+        </div>
+      </li>
+      <li>
+        <div class="item-content">
+          <div class="item-media"><i class="icon icon-form-traffic"></i></div>
+          <div class="item-inner">
+            <div class="item-title label">交通</div>
+            <div class="item-input">
+              <input type="text" :value="month.traffic">
+            </div>
+          </div>
+        </div>
+      </li>
+      <li>
+        <div class="item-content">
+          <div class="item-media"><i class="icon icon-form-shopping"></i></div>
+          <div class="item-inner">
+            <div class="item-title label">购物</div>
+            <div class="item-input">
+              <input type="text" :value="month.shopping" >
+            </div>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div class="list-block" style="margin: 10px 0px">
+    总设置
+    <ul>
+      <li>
+        <div class="item-content">
+          <div class="item-media"><i class="icon icon-form-renting"></i></div>
+          <div class="item-inner">
+            <div class="item-title label">租房</div>
+            <div class="item-input">
+              <input type="text" :value="total.renting">
+            </div>
+          </div>
+        </div>
+      </li>
+      <li>
+        <div class="item-content">
+          <div class="item-media"><i class="icon icon-form-restaurant"></i></div>
+          <div class="item-inner">
+            <div class="item-title label">餐饮</div>
+            <div class="item-input">
+              <input type="text" :value="total.restaurant">
+            </div>
+          </div>
+        </div>
+      </li>
+      <li>
+        <div class="item-content">
+          <div class="item-media"><i class="icon icon-form-traffic"></i></div>
+          <div class="item-inner">
+            <div class="item-title label">交通</div>
+            <div class="item-input">
+              <input type="text" :value="total.traffic">
+            </div>
+          </div>
+        </div>
+      </li>
+      <li>
+        <div class="item-content">
+          <div class="item-media"><i class="icon icon-form-shopping"></i></div>
+          <div class="item-inner">
+            <div class="item-title label">购物</div>
+            <div class="item-input">
+              <input type="text"  :value="total.shopping">
+            </div>
+          </div>
+        </div>
+      </li>
+      <li>
+        <div class="item-content">
+          <div class="item-media"><i class="icon icon-form-shopping"></i></div>
+          <div class="item-inner">
+            <div class="item-title label">旅游</div>
+            <div class="item-input">
+              <input type="text"  :value="total.travel">
+            </div>
+          </div>
+        </div>
+      </li>
+      <li>
+        <div class="item-content">
+          <div class="item-media"><i class="icon icon-form-shopping"></i></div>
+          <div class="item-inner">
+            <div class="item-title label">车险</div>
+            <div class="item-input">
+              <input type="text" :value="total.car_insurance" >
+            </div>
+          </div>
+        </div>
+      </li>
+      <li>
+        <div class="item-content">
+          <div class="item-media"><i class="icon icon-form-shopping"></i></div>
+          <div class="item-inner">
+            <div class="item-title label">过年</div>
+            <div class="item-input">
+              <input type="text"  :value="total.red_gift">
+            </div>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div class="content-block">
+    <div class="row">
+      <div class="col-50"><a href="#" class="button button-big button-fill button-danger">取消</a></div>
+      <div class="col-50"><a href="#" class="button button-big button-fill button-success">保存</a></div>
+    </div>
+  </div>
+</div>
+
 </body>
+<script src="../script/vue.js" charset="utf-8"></script>
+<script type="text/javascript">
+  var app = new Vue({
+    el: '#app',
+    data: {
+      total:{
+        renting: 50000,
+        restaurant: 38000,
+        traffic: 6000,
+        shopping: 12000,
+        travel: 16500,
+        red_gift: 5000,
+        car_insurance:3500
+      },
+      month:{
+        renting: 4100,
+        restaurant: 3100,
+        traffic: 500,
+        shopping: 1000,
+      }
+    }
+  })
+</script>
 </html>

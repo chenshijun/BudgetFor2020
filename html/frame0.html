@@ -1,17 +1,243 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
     <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
     <title>云API</title>
-    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
-    <link rel="stylesheet" type="text/css" href="../css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../css/aui.css" />
     <style>
-        .empty{ text-align: center; padding: 120px 0; }
+        .empty {
+            text-align: center;
+            padding: 120px 0;
+        }
+
+        #loader {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        body {
+            height: 100vh;
+        }
+
+        #loader {
+            flex-direction: column-reverse;
+            color: #8aaaff;
+            font: 2.5em sans-serif;
+        }
+
+        progress[value] {
+            width: 100%;
+            height: 0.25em;
+            border: none;
+            border-radius: 0.125em;
+            background: #e6eeff;
+        }
+
+        progress[value]::-webkit-progress-bar {
+            border: none;
+            border-radius: 0.125em;
+            background: #e6eeff;
+        }
+
+        progress[value]::-webkit-progress-value {
+            border: none;
+            border-radius: inherit;
+            background: linear-gradient(90deg, #8aaaff, #fa8cff);
+        }
+
+        progress[value]::-moz-progress-bar {
+            border: none;
+            border-radius: inherit;
+            background: linear-gradient(90deg, #8aaaff, #fa8cff);
+        }
+
+        progress[value]::-ms-fill {
+            border: none;
+            border-radius: inherit;
+            background: linear-gradient(90deg, #8aaaff, #fa8cff);
+        }
+
+        output:not(:empty) {
+            padding-bottom: 1em;
+        }
+
+        output:not(:empty):after {
+            content: '%';
+        }
     </style>
 </head>
+
 <body>
-    <div class="empty">云API</div>
+  <div id="app">
+    本月已用
+    <div class="aui-card-list">
+        <div class="aui-card-list-content">
+            <ul class="aui-list aui-media-list">
+                <li class="aui-list-item aui-list-item-middle">
+                    <div class="aui-media-list-item-inner">
+                        <div class="aui-list-item-media" style="width: 3rem;">
+                            <img src="../image/home.png" class="aui-img-round">
+                        </div>
+                        <div class="aui-list-item-inner">
+                            <div class="aui-list-item-text" style="margin-bottom:5px">
+                                <div class="aui-list-item-title aui-font-size-12">住房  {{Math.ceil(used.renting/total.renting*100)}}%</div>
+                                <div class="aui-list-item-right">{{used.renting}}/{{total.renting}}</div>
+                            </div>
+                            <div class="aui-list-item-text">
+                                <progress id="p" :value="used.renting" :max="total.renting"></progress>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="aui-list-item aui-list-item-middle">
+                    <div class="aui-media-list-item-inner">
+                        <div class="aui-list-item-media" style="width: 3rem;">
+                            <img src="../image/food.png" class="aui-img-round">
+                        </div>
+                        <div class="aui-list-item-inner">
+                            <div class="aui-list-item-text" style="margin-bottom:5px">
+                                <div class="aui-list-item-title aui-font-size-12">饮食  {{Math.ceil(used.restaurant/total.restaurant*100)}}%</div>
+                                <div class="aui-list-item-right">{{used.restaurant}}/{{total.restaurant}}</div>
+                            </div>
+                            <div class="aui-list-item-text">
+                                <progress id="p" :value="used.restaurant" :max="total.restaurant"></progress>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="aui-list-item aui-list-item-middle">
+                    <div class="aui-media-list-item-inner">
+                        <div class="aui-list-item-media" style="width: 3rem;">
+                            <img src="../image/traffic.png" class="aui-img-round">
+                        </div>
+                        <div class="aui-list-item-inner">
+                            <div class="aui-list-item-text" style="margin-bottom:5px">
+                                <div class="aui-list-item-title aui-font-size-12">交通  {{Math.ceil(used.traffic/total.traffic*100)}}%</div>
+                                <div class="aui-list-item-right">{{used.traffic}}/{{total.traffic}}</div>
+                            </div>
+                            <div class="aui-list-item-text">
+                              <progress id="p" :value="used.traffic" :max="total.traffic"></progress>
+                                <!-- <progress id="p" value="44" max="100"></progress> -->
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="aui-list-item aui-list-item-middle">
+                    <div class="aui-media-list-item-inner">
+                        <div class="aui-list-item-media" style="width: 3rem;">
+                            <img src="../image/shopping.png" class="aui-img-round">
+                        </div>
+                        <div class="aui-list-item-inner">
+                            <div class="aui-list-item-text" style="margin-bottom:5px">
+                                <div class="aui-list-item-title aui-font-size-12">购物  {{Math.ceil(used.shopping/total.shopping*100)}}%</div>
+                                <div class="aui-list-item-right">{{used.shopping}}/{{total.shopping}}</div>
+                            </div>
+                            <div class="aui-list-item-text">
+                                <progress id="p" :value="used.shopping" :max="total.shopping"></progress>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    本月结余
+    <div class="aui-card-list">
+        <div class="aui-card-list-content">
+            <ul class="aui-list aui-media-list">
+                <li class="aui-list-item aui-list-item-middle">
+                    <div class="aui-media-list-item-inner">
+                        <div class="aui-list-item-media" style="width: 3rem;">
+                            <img src="../image/home.png" class="aui-img-round">
+                        </div>
+                        <div class="aui-list-item-inner">
+                            <div class="aui-list-item-text" style="margin-bottom:5px">
+                                <div class="aui-list-item-title aui-font-size-12">住房  {{Math.ceil((total.renting - used.renting)/total.renting*100)}}%</div>
+                                <div class="aui-list-item-right">{{total.renting - used.renting}}</div>
+                            </div>
+                            <div class="aui-list-item-text">
+                                <progress id="p" :value="total.renting - used.renting" :max="total.renting"></progress>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="aui-list-item aui-list-item-middle">
+                    <div class="aui-media-list-item-inner">
+                        <div class="aui-list-item-media" style="width: 3rem;">
+                            <img src="../image/food.png" class="aui-img-round">
+                        </div>
+                        <div class="aui-list-item-inner">
+                            <div class="aui-list-item-text" style="margin-bottom:5px">
+                                <div class="aui-list-item-title aui-font-size-12">饮食  {{Math.ceil((total.restaurant - used.restaurant)/total.restaurant*100)}}%</div>
+                                <div class="aui-list-item-right">{{total.restaurant - used.restaurant}}</div>
+                            </div>
+                            <div class="aui-list-item-text">
+                                <progress id="p" :value="total.restaurant-used.restaurant" :max="total.restaurant"></progress>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="aui-list-item aui-list-item-middle">
+                    <div class="aui-media-list-item-inner">
+                        <div class="aui-list-item-media" style="width: 3rem;">
+                            <img src="../image/traffic.png" class="aui-img-round">
+                        </div>
+                        <div class="aui-list-item-inner">
+                            <div class="aui-list-item-text" style="margin-bottom:5px">
+                                <div class="aui-list-item-title aui-font-size-12">交通  {{Math.ceil((total.traffic - used.traffic)/total.traffic*100)}}%</div>
+                                <div class="aui-list-item-right">{{total.traffic - used.traffic}}</div>
+                            </div>
+                            <div class="aui-list-item-text">
+                                <progress id="p" :value="total.traffic - used.traffic" max="total.traffic"></progress>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="aui-list-item aui-list-item-middle">
+                    <div class="aui-media-list-item-inner">
+                        <div class="aui-list-item-media" style="width: 3rem;">
+                            <img src="../image/shopping.png" class="aui-img-round">
+                        </div>
+                        <div class="aui-list-item-inner">
+                            <div class="aui-list-item-text" style="margin-bottom:5px">
+                                <div class="aui-list-item-title aui-font-size-12">购物  {{Math.ceil((total.shopping - used.shopping)/total.shopping*100)}}%</div>
+                                <div class="aui-list-item-right">{{total.shopping - used.shopping}}</div>
+                            </div>
+                            <div class="aui-list-item-text">
+                                <progress id="p" :value="total.shopping - used.shopping" :max="total.shopping"></progress>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+  </div>
 </body>
+<script src="../script/vue.js" charset="utf-8"></script>
+<script type="text/javascript">
+  var app = new Vue({
+    el: '#app',
+    data: {
+      total:{
+        renting: 2700 + 668,
+        restaurant: 3100,
+        traffic:148,
+        shopping: 486,
+      },
+      used:{
+        renting: 2700 + 668,
+        restaurant: 4000,
+        traffic:148,
+        shopping: 486,
+      }
+    }
+  })
+</script>
 </html>

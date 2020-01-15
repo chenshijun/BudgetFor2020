@@ -4,14 +4,76 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
     <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
-    <title>端API</title>
+    <title>本月可用</title>
     <link rel="stylesheet" type="text/css" href="../css/api.css"/>
     <link rel="stylesheet" type="text/css" href="../css/style.css"/>
-    <style>
-        .empty{ text-align: center; padding: 120px 0; }
-    </style>
+    <link rel="stylesheet" type="text/css" href="../css/sm.min.css" />
 </head>
 <body>
-    <div class="empty">端API</div>
+
+  <div class="list-block" id="app" style="margin: 10px 0px">
+    总剩余
+    <ul>
+      <li>
+        <div class="item-content">
+          <div class="item-media"><i class="icon icon-form-renting"></i></div>
+          <div class="item-inner">
+            <div class="item-title label">租房</div>
+            <div class="item-input">
+              <input type="text" :value="surplus.renting">
+            </div>
+          </div>
+        </div>
+      </li>
+      <li>
+        <div class="item-content">
+          <div class="item-media"><i class="icon icon-form-restaurant"></i></div>
+          <div class="item-inner">
+            <div class="item-title label">餐饮</div>
+            <div class="item-input">
+              <input type="text" :value="surplus.restaurant">
+            </div>
+          </div>
+        </div>
+      </li>
+      <li>
+        <div class="item-content">
+          <div class="item-media"><i class="icon icon-form-traffic"></i></div>
+          <div class="item-inner">
+            <div class="item-title label">交通</div>
+            <div class="item-input">
+              <input type="text" :value="surplus.traffic">
+            </div>
+          </div>
+        </div>
+      </li>
+      <li>
+        <div class="item-content">
+          <div class="item-media"><i class="icon icon-form-shopping"></i></div>
+          <div class="item-inner">
+            <div class="item-title label">购物</div>
+            <div class="item-input">
+              <input type="text" :value="surplus.shopping" >
+            </div>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+
 </body>
+<script src="../script/vue.js" charset="utf-8"></script>
+<script type="text/javascript">
+  var app = new Vue({
+    el: '#app',
+    data: {
+      surplus:{
+        renting: 4100,
+        restaurant: 3100,
+        traffic: 500,
+        shopping: 1000,
+      }
+    }
+  })
+</script>
 </html>

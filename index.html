@@ -13,7 +13,7 @@
         header ul li.active{ display: block; }
         #footer{  background-color: #f2f2f2; }
         #footer ul li{  padding-top: 36px; padding-bottom: 4px; background: url() no-repeat center 2px; background-size: auto 30px; text-align: center; }
-        #footer ul li.active{ color: #6ab494; }
+        #footer ul li.active{ color: #2db0f6; }
         #footer ul li:nth-child(1){ background-image: url(./image/total0.png); }
         #footer ul li:nth-child(2){ background-image: url(./image/remainder0.png); }
         #footer ul li:nth-child(3){ background-image: url(./image/setting0.png); }
@@ -32,8 +32,8 @@
     <header>
         <ul>
             <li class="border-b active" >已用</li>
-            <li class="border-b" >剩余</li>
-            <li class="border-b" >设置</li>
+            <li class="border-b" >本月可用</li>
+            <li class="border-b" >预算设置</li>
             <li class="border-b" >总计</li>
         </ul>
     </header>
@@ -42,9 +42,9 @@
     </div>
     <div id="footer" class="border-t">
         <ul class="flex-wrap" >
-            <li tapmode="hover" onclick="randomSwitchBtn( this );" class="flex-con active" >已用</li>
-            <li tapmode="hover" onclick="randomSwitchBtn( this );" class="flex-con" >剩余</li>
-            <li tapmode="hover" onclick="randomSwitchBtn( this );" class="flex-con" >设置</li>
+            <li tapmode="hover" onclick="randomSwitchBtn( this );" class="flex-con active" >当月使用</li>
+            <li tapmode="hover" onclick="randomSwitchBtn( this );" class="flex-con" >本月可用</li>
+            <li tapmode="hover" onclick="randomSwitchBtn( this );" class="flex-con" >预算设置</li>
             <li tapmode="hover" onclick="randomSwitchBtn( this );" class="flex-con" >总计</li>
         </ul>
     </div>
